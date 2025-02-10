@@ -1,5 +1,7 @@
 atomicwrites==1.4.0
 
+alembic == 1.14.1
+
 attrs==20.3.0
 
 bcrypt==3.2.0
@@ -40,6 +42,8 @@ packaging==20.9
 
 passlib==1.7.4
 
+passlib[bcrypt]
+
 pluggy==0.13.1
 
 psycopg2==2.8.6
@@ -51,6 +55,8 @@ pyasn1==0.4.8
 pycparser==2.20
 
 pydantic==1.8.1
+
+pydantic[email]
 
 pyparsing==2.4.7
 
