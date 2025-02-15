@@ -13,6 +13,9 @@ class CreateBlog(BaseModel):
             values['slug'] = values.get("title").replace("","-").lower()
         return values
     
+class UpdateBlog(CreateBlog):
+    pass
+
 class ShowBlog(BaseModel):
     title : str
     content : Optional[str]
