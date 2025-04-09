@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+   <title>Blog</title>
+{% endblock  %}
+
+{% block content %}
+  {% with alert=alert %}
+    {% include 'components/alert.html' %}
+  {% endwith %}
+  <div class="container">
+    <h2 class="text-muted"><ul><u>All blogs</u></ul></h2>
+    <div class="row justify-content-center">
+      {% for blog in blogs %}
+        <div class="col-sm-4 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-text">{{blog.title}}</h5>
+            </div>
+            <div class="card-body">
+              <p class="class-text"> First published : {{blog.created_at.strftime('%d-%m-%Y')}}</p>
+              <small class="card-text text-muted"> Content : {{blog.content[:50]}}...</small>
+              <br>
+              <a href="/app/blog/{{blog.id}}" class="btn btn-outline-success">Read more</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>  
+  </div>
+{% endblock  %}
