@@ -3,4 +3,7 @@
 2. Now install the libraries using the requirements.txt file after activating the virtual env
 3. Create a core file that will hold the config, hashing and security files for the project
 4. Create a main and .env file that will be used for exec of the project.
-5. 
+5. Next we must create the Database model and its functions. This will be done in the db folder.
+6. Create a videos model which will store all the details of videos either being uploaded or scraped.
+7. Create a user model that will store username, email, password and user id.
+8. Now create a repository within the db folder which will containe all the functions that will be executed on the database.
