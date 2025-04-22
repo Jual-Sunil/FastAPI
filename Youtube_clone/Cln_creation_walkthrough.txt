@@ -1,0 +1,6 @@
+1. Begins by creating the virtual env using "python -m venv yclone_env"
+   This will be the location where all the required libraries will be installed
+2. Now install the libraries using the requirements.txt file after activating the virtual env
+3. Create a core file that will hold the config, hashing and security files for the project
+4. Create a main and .env file that will be used for exec of the project.
+5. 
