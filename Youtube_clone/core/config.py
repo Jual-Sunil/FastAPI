@@ -9,7 +9,7 @@ class Settings:
     PROJECT_TITLE = "You clone"
     PROJECT_VERSION = '0.1.0'
     #Database details
-    POSTGRES_USER: str = os.getenv("SER")
+    POSTGRES_USER: str = os.getenv("USER")
     POSTGRES_PASSWORD: str = os.getenv("PASSWORD")
     POSTGRES_SERVER: str = os.getenv("SERVER", "localhost")
     POSTGRES_PORT: str = os.getenv("PORT",5432)
