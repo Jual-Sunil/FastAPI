@@ -1,5 +1,4 @@
 import json
-from pydantic import constr
 from fastapi import APIRouter,Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi import responses, status, Form
@@ -24,7 +23,6 @@ def register(request : Request, email : str = Form(...), password : str = Form(.
     error = []
     try:
         user = UserCreate(email = email, password = password)
-        print("User created")
         create_new_user(user=user,db=db)
         print("Returning response")
         return responses.RedirectResponse("/?alert=Successfully%20Registered", status_code=status.HTTP_302_FOUND)
