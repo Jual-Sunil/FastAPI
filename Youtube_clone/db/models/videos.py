@@ -13,7 +13,6 @@ class Video(Base):
     source = Column(String) # youtube, vimeo or upload
     upload_type = Column(String, default = "scraped") # or upload
     creator_id = Column(Integer, ForeignKey("users.id"), nullable=True)
-    creator = relationship("User", back_populates="videos")
     created_at = Column(DateTime, default= datetime.now)
     views = Column(Integer, default=0)
     likes = Column(Integer, default=0)
