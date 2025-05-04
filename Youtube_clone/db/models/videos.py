@@ -10,9 +10,10 @@ class Video(Base):
     desc = Column(Text, nullable = False)
     video_url = Column(String(500), nullable = False)
     thumbnail_url = Column(String(500))
-    source = Column(String) # youtube, vimeo or upload
+    source = Column(String, default = "youtube") # youtube, vimeo or upload
     upload_type = Column(String, default = "scraped") # or upload
     creator_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    creator_name = Column(String(100))
     created_at = Column(DateTime, default= datetime.now)
     views = Column(Integer, default=0)
     likes = Column(Integer, default=0)

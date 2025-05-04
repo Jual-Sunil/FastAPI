@@ -22,5 +22,13 @@ class Settings:
     #Google auth and login settings
     GOOGLE_CLIENT_ID : str = os.getenv("GOOGLE_CLIENTID")
     GOOGLE_CLIENT_SECRET : str = os.getenv("GOOGLE_CLIENTSECRET")
-
+    #Youtube API settings
+    YOUTUBE_DATAKEY : str = os.getenv("YOUTUBE_DATA_KEY")
+    YOUTUBE_FETCHURL = str = os.getenv("YOUTUBE_FETCH_URL")
+    QUERY_KEYWORD_LIST = ["music", "technology", "news", "sports", "travel", "education", "comedy", "movies", "science",
+                        "gaming", "vlogs", "fitness", "health", "finance", "motivation", "art", "photography", "cooking",
+                        "DIY", "history", "space", "nature", "animals", "interviews", "tutorials", "makeup", "fashion",
+                        "cars", "motorcycles", "architecture", "food", "recipes", "animation", "reviews", "books",
+                        "productivity", "coding", "startups", "culture", "documentary", "psychology", "languages", "dance",
+                        "instrumental", "spirituality", "investing", "home decor", "martial arts", "parenting", "challenges"]
 settings = Settings()
