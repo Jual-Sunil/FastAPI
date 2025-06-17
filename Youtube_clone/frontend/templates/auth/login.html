@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Login</title>
+{% endblock title %}
+
+{% block content %}
+    {% if error %}
+        {% for err in error %}
+            <div class="alert alert-danger" style="width : fit-content; height: fit-content; margin-inline: auto;">
+                <li>{{err}}</li>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+    <div class="container">
+        <br><br><div class="text-center display-4">Welcome to youclone!</div>
+        <br><p style="text-align: center;">Please login to begin.</p>
+        <div class="row mt-3 mb-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form method="POST">
+                    <label>Email</label>
+                    <input type="email" name="email" required class="form-control mb-2" value="{{email}}" placeholder="Enter your email here.">
+
+                    <label>Password</label>
+                    <input type="password" name ="password" minlength="4" required class="form-control mb-2" value="{{password}}" placeholder="Enter your password here.">
+                
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-success">Login</button><br><br>
+                        <p>Other login options</p>
+                        <a href="/login/google" class="btn btn-danger">Login with Google</a> <br><br>    
+                    </div>    
+                    <div style="text-align: center;"><p>Want to register?</p><a href="/register">Click here</a></div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+    <script>
+        // Wait for page load event
+        window.addEventListener('DOMContentLoaded', () => {
+          // Find all alerts
+          const alerts = document.querySelectorAll('.alert');
+          
+          // Hide after 5 seconds
+          setTimeout(() => {
+            alerts.forEach(alert => {
+              alert.style.transition = "opacity 1s ease";
+              alert.style.opacity = '0';
+              setTimeout(() => alert.remove(), 1000); // remove it from DOM
+            });
+          }, 5000);
+        });
+      </script>
+      
+{% endblock content %}

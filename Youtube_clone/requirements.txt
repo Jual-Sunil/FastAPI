@@ -20,21 +20,29 @@ chardet==4.0.0
 
 click==7.1.2
 
+cohere==4.41
+
 colorama==0.4.4
 
 coverage==5.5
 
 dnspython==2.1.0
 
+dotenv==0.9.9
+
 ecdsa==0.14.1
 
-email-validator==1.1.2
+email-validator==2.2.0
 
-fastapi==0.63.0
+fastapi==0.115.12
 
 greenlet==1.0.0
 
-h11==0.12.0
+google
+
+google_auth == 2.39.0
+
+h11==0.14.0
 
 httpx==0.24.1
 
@@ -66,7 +74,7 @@ pyasn1==0.4.8
 
 pycparser==2.20
 
-pydantic==1.8.1
+pydantic==2.10.6
 
 pydantic[email]
 
@@ -78,7 +86,7 @@ pytest-cov==2.11.1
 
 python-dotenv==0.17.0
 
-python-dateutil==1.15.0
+python-dateutil==2.9.0
 
 python-jose==3.2.0
 
@@ -96,7 +104,7 @@ starlette==0.13.6
 
 toml==0.10.2
 
-typing-extensions==3.7.4.3
+typing-extensions==4
 
 urllib3==1.26.4
 

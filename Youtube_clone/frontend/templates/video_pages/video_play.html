@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-lg-8 mb-4" >
+                
+                <div class="ratio ratio-16x9 mb-3">
+                    <iframe src="https://www.youtube.com/embed/{{ video.id }}" 
+                    frameborder="0"
+                    style="border-radius: 10px;"
+                    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                    allowfullscreen>
+                    <!-- style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" !-->
+                    </iframe>
+                </div>
+            
+                <h2 class="mt-4 text-xl font-bold">{{video.title}}</h2>
+
+                <div class="border rounded p-3 mt-4 bg-dark text-white">
+                
+                    <!-- Flex Container: Creator Info & Stats -->
+                    <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+                    <!-- Creator Info -->
+                    <div class="d-flex align-items-start gap-2">
+                        <div>
+                        <div class="fw-semibold">{{ video.creator_name }}</div>
+                        <div class="small text-white-50">Published on {{ video.created_at.strftime('%b %d, %Y') }}</div>
+                        </div>
+                    </div>
+                
+                    <!-- Stats -->
+                    <div class="text-md-end small">
+                        <div>{{ video.views }} views • {{ video.duration | format_duration }}</div>
+                        <div>{{ video.likes }} likes</div>
+                    </div>
+                    </div>
+                
+                    <!-- Video Description -->
+                    <p class="mt-3" id="desc"></p>
+                
+                </div>
+  
+            </div>
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">Recommended</h5>
+                    {% for v in recommendations %}
+                    <a href="/videos/{{ v.id }}" class="d-flex mb-3" style="text-decoration: none; color: white;padding: 5px;">
+                        <img src="{{ v.thumbnail_url }}" class="me-3 rounded" style="width: 160px; height: 90px; object-fit: cover;" alt="thumbnail">
+                        <div class="flex-grow-1">
+                        <div class="fw-semibold" style="padding: 2px;" >{{ v.title[:60] }}{% if v.title|length > 60 %}...{% endif %}</div>
+                        <div class="small" style="padding: 2px;">{{ v.creator_name }}</div>
+                        <div class="small" style="padding: 2px;">{{ v.views }} views</div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div> 
+    </div>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const fullText = `{{ video.desc | tojson }}`;
+          const maxWords = 30;
+          const words = fullText.split(" ");
+          const descEl = document.getElementById("desc");
+            
+          function formattext(text) {
+            return text.replace(/\n/g, "<br>")
+          }
+
+          if (words.length > maxWords) {
+            const shortText = words.slice(0, maxWords).join(" ") + "…";
+            descEl.innerHTML = shortText + ` <a href="#" id="show-more" class="text-primary">more</a>`;
+            document.getElementById("show-more").addEventListener("click", function (e) {
+              e.preventDefault();
+              descEl.innerHTML = formattext(fullText);
+            });
+          } else {
+            descEl.textContent = formattext(fullText);
+          }
+        });
+      </script>
+{% endblock  %}
