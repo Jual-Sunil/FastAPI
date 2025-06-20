@@ -104,7 +104,7 @@ starlette==0.40.0
 
 toml==0.10.2
 
-typing-extensions==4
+typing-extensions==4.8.0
 
 urllib3==1.26.4
 
