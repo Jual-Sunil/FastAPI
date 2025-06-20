@@ -36,7 +36,7 @@ email-validator==2.2.0
 
 fastapi==0.115.12
 
-greenlet==1.0.0
+greenlet==2.0.2
 
 google
 
@@ -63,6 +63,8 @@ packaging==20.9
 passlib==1.7.4
 
 passlib[bcrypt]
+
+pip>=23.0
 
 pluggy==0.13.1
 
@@ -96,6 +98,8 @@ requests==2.25.1
 
 rsa==4.7.2
 
+setuptools>=65.0
+
 six==1.15.0
 
 SQLAlchemy==1.4.11
@@ -109,3 +113,5 @@ typing-extensions==4.12.2
 urllib3==1.26.4
 
 uvicorn==0.13.4
+
+wheel>=0.38
