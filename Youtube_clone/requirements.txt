@@ -100,7 +100,7 @@ six==1.15.0
 
 SQLAlchemy==1.4.11
 
-starlette==0.13.6
+starlette==0.40.0
 
 toml==0.10.2
 
