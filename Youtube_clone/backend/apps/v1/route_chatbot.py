@@ -72,6 +72,8 @@ def chat(request : Request, conversation_id : str = Form(...), message : str = F
     
     elif user_msg == "2":
         response = "Okay! Please describe the kind of video you're looking for."
+        convo.messages.append(Message(role="assistant", content=response))
+        return templates.TemplateResponse("components/chatbot.html", context=context )
     else:
         response = query_cohere_api(convo)
         if not response.strip():
