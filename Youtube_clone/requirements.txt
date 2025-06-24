@@ -49,5 +49,5 @@ toml==0.10.2
 typing-extensions==4.12.2
 urllib3==1.26.4
 uvicorn==0.13.4
-psycopg2-binary==2.8.6
+psycopg2-binary==2.9.9
 setuptools>=65.0 
