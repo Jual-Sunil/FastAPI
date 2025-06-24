@@ -14,7 +14,7 @@ class Settings:
     POSTGRES_SERVER: str = os.getenv("SERVER", "localhost")
     POSTGRES_PORT: str = os.getenv("PORT",5432)
     POSTGRES_DB: str = os.getenv("Database")
-    DATABASE_URL: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    DATABASE_URL: str = os.getenv("DATABASE_URL")
     # JSON web token creation (JWT)
     KEY : str = os.getenv("SECRET_KEY")
     ALGORITHM : str = "HS256"
