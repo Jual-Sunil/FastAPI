@@ -1,4 +1,5 @@
 import os
+from urllib.parse import quote_plus
 from dotenv import load_dotenv
 from pathlib import Path
 env_path = Path(".") / '.env'
@@ -14,8 +15,10 @@ class Settings:
     POSTGRES_SERVER: str = os.getenv("SERVER", "localhost")
     POSTGRES_PORT: str = os.getenv("PORT",5432)
     POSTGRES_DB: str = os.getenv("Database")
-    #DATABASE_URL: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
-    DATABASE_URL: str = os.getenv("DATABASE_URL")
+    safe_user = quote_plus(POSTGRES_USER)
+    safe_pass = quote_plus(POSTGRES_PASSWORD)
+    DATABASE_URL: str = f"postgresql://{safe_user}:{safe_pass}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    #DATABASE_URL: str = os.getenv("DATABASE_URL")
     # JSON web token creation (JWT)
     KEY : str = os.getenv("SECRET_KEY")
     ALGORITHM : str = "HS256"
