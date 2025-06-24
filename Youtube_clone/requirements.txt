@@ -50,4 +50,4 @@ typing-extensions==4.12.2
 urllib3==1.26.4
 uvicorn==0.13.4
 psycopg2-binary==2.8.6
- 
+setuptools>=65.0 
