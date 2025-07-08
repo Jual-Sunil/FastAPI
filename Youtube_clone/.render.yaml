@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: youtube-clone
+    env: python
+    runtime: python-3.11
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host=0.0.0.0 --port=10000
+    rootDir: Youtube_clone
+    buildFilter:
+      paths:
+        - Youtube_clone/**/*
