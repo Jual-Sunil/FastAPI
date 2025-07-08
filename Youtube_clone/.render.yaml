@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: youtube-clone
-    env: docker
-    dockerfilePath: Youtube_clone/Dockerfile
-    rootDir: Youtube_clone
-    buildCommand: ""       # Docker handles build inside container
-    startCommand: ""       # Dockerfile CMD is used
