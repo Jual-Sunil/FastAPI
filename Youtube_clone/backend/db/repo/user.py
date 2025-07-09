@@ -8,7 +8,7 @@ def create_new_user(user : UserCreate, db : Session):
         username = user.username,
         email = user.email,
         password = Hasher.get_pass_hash(user.password),
-        prof_img = user.prof_img
+        prof_img = user.prof_img if user.prof_img else ""
     )
     db.add(user)
     db.commit()

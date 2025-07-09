@@ -8,5 +8,5 @@ class User(Base):
     username = Column(String, nullable = False, unique = True)
     email = Column(String, nullable=False, unique=True, index=True)
     password = Column(String, nullable=False)
-    prof_img = Column(String)
+    prof_img = Column(String, default = "")
     is_active = Column(Boolean, default=True)

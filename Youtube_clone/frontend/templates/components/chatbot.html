@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if {{ user.username }} %}
         <body class="bg-dark text-light">
             <div class="container py-4">
                 <h1 class="mb-4" style="text-align: center;">AI chatbot</h1>
@@ -51,4 +52,13 @@
                 {% endif %}
             </div>
         </body>
+    {% else %}
+        <body class="bg-dark text-light">
+            <div class="container mt-5 p-4 border border-light rounded" style="border-width: 5px;">
+            <h3 class="container text-center" style="padding: 10px;">Welcome to Youclone!</h3>
+            <h3 class="container text-center" style="padding: 10px;">Please login to use the chatbot</h3>
+            </div> 
+        </body>
+    {% endif %}    
+        
 {% endblock  %}
