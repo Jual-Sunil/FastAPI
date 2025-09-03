@@ -1,0 +1,11 @@
+USER = username for DB
+PASSWORD = DB password
+SERVER = localhost #localhost for local development
+PORT = 5432
+Database = DB name
+LOCAL_DATABASE_URL = postgresql://USER:PASSWORD@localhost:5432/Database
+GOOGLE_CLIENTID = Google client ID
+GOOGLE_CLIENTSECRET = client secret
+YOUTUBE_DATA_KEY = Youtube API key
+COHERE_API_KEY = Cohere API key
+SECRET_KEY = Any secret key for JWT encryption
