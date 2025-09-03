@@ -45,9 +45,7 @@ def token_from_cookie(access_token : str = Cookie(None)):
 def get_curr_user( request: Request, token : str = Depends(token_from_cookie), db : Session = Depends(get_db)) -> User:
     error = []
     if not token:
-        #request.session['error'] = ["Session expired. Please login again"]
         return None
-        #return responses.RedirectResponse('/login', status_code=status.HTTP_302_FOUND)
     try:
         payload = jwt.decode(token,settings.KEY, algorithms=settings.ALGORITHM)
         email : str = payload.get("sub")
@@ -55,14 +53,12 @@ def get_curr_user( request: Request, token : str = Depends(token_from_cookie), d
         if email is None:
             raise JWTError("Invalid token payload")
     except JWTError:
-        #request.session['error'] = ["Invalid token. Please login again"]
         response = responses.RedirectResponse("/login", status_code=status.HTTP_302_FOUND)
         response.delete_cookie("access_token")
         print("Invalid token")
         return None
         #return response
     except ExpiredSignatureError:
-        #request.session['error'] = ["Session expired. Please login again"]
         response = responses.RedirectResponse('/login', status_code=status.HTTP_302_FOUND)
         response.delete_cookie("access_token")
         print("Token expired")
@@ -70,7 +66,5 @@ def get_curr_user( request: Request, token : str = Depends(token_from_cookie), d
         #return response
     user = get_user_by_email(email=email,db=db)
     if user is None:
-        #request.session['error'] = ["User not found!"]
         return None
-        #return RedirectResponse('/login', status_code=status.HTTP_302_FOUND)
     return user

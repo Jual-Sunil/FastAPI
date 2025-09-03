@@ -16,7 +16,7 @@ def scheduled_scrape():
     finally:
         db.close()
 
-@scheduler.scheduled_job("interval", minutes=1)
+@scheduler.scheduled_job("interval", seconds=5)
 def scheduled_job():
     scheduled_scrape()
     print("Scraping!")

@@ -19,4 +19,5 @@ class Video(Base):
     likes = Column(Integer, default=0)
     tags = Column(String)
     duration = Column(String)
+    q_tag = Column(String)
     is_active = Column(Boolean, default=True)

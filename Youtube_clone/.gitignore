@@ -1,5 +1,6 @@
 __pycache__
 *.pyc
 .env
-yclone_env
+yc_env
 Cln_creation_walkthrough.txt
+you_clonedbfile.sql

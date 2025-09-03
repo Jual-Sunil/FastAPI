@@ -1,64 +1,191 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if {{ user.username }} %}
+    {% if username %}
         <body class="bg-dark text-light">
             <div class="container py-4">
-                <h1 class="mb-4" style="text-align: center;">AI chatbot</h1>
-                <div class="bg-secondary p-3 rounded mb-3 " style="max-height: 60vh; overflow-y: auto;">
-                    {% for message in messages %}
-                        <div class="mb-2">
-                            <strong>{{message.role | capitalize }}:</strong>
-                            <div>{{message.content | safe }}</div>
-                        </div>
-                    {% endfor %}
+                <!-- Header Section -->
+                <div class="text-center mb-4">
+                    <h1 class="display-4 mb-2">AI Video Assistant</h1>
+                    <p class="lead text-muted">Find videos using natural language descriptions</p>
                 </div>
-                {% if tags %}
-                    <div class="mb-3">
-                        <form action="/chat/tag-res" method="post">
-                            <input type="hidden" name="conversation_id" value="{{conversation_id}}">
-                            <p>Select your tags:</p>
-                            <div class="d-flex flex-wrap gap-2">
-                                {% for tag in tags  %}
-                                        <input type="checkbox" 
-                                        name="selected_tags" 
-                                        value="{{tag}}" 
-                                        autocomplete="off" 
-                                        class="btn btn-lg btn-outline-light btn-check" 
-                                        id="tag-{{loop.index}}">
-                                        <label class="btn btn-lg btn-outline-primary m-1" for="tag-{{loop.index}}">{{tag}}</label>
-                                {% endfor %}
+
+                <!-- Main Search Interface -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <!-- Search Form -->
+                        <div class="bg-secondary p-4 rounded mb-4">
+                            <form action="/chat/search" method="post">
+                                <div class="mb-3">
+                                    <label for="description" class="form-label h5">
+                                        <i class="fas fa-search me-2"></i>Describe the videos you're looking for:
+                                    </label>
+                                    <textarea 
+                                        name="description" 
+                                        id="description"
+                                        class="form-control form-control-lg" 
+                                        rows="3"
+                                        placeholder="Example: 'funny cat videos', 'cooking tutorials for beginners', 'relaxing nature documentaries'..."
+                                        required
+                                        style="resize: vertical; min-height: 80px;">
+                                    </textarea>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-search me-2"></i>Search Videos
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Search Examples -->
+                        <div class="bg-dark border rounded p-3 mb-4">
+                            <h6 class="text-info mb-3">
+                                <i class="fas fa-lightbulb me-2"></i>Search Examples:
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="bg-secondary rounded p-2 text-center">
+                                        <small>"Funny comedy skits"</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-secondary rounded p-2 text-center">
+                                        <small>"Educational science videos"</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-secondary rounded p-2 text-center">
+                                        <small>"Music and entertainment"</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-secondary rounded p-2 text-center">
+                                        <small>"Tech reviews and tutorials"</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-2">
-                                <button type="submit" name="message" value="done" class="btn btn-lg btn-success">Find videos</button>
+                        </div>
+
+                        <!-- Quick Suggestions Section -->
+                        <div class="bg-secondary p-3 rounded mb-4">
+                            <h6 class="text-warning mb-3">
+                                <i class="fas fa-star me-2"></i>Quick Search Suggestions:
+                            </h6>
+                            <form action="/chat/search" method="post">
+                                <div class="row g-2">
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="comedy" class="btn btn-outline-light btn-sm w-100">
+                                            Comedy
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="music" class="btn btn-outline-light btn-sm w-100">
+                                            Music
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="tutorial" class="btn btn-outline-light btn-sm w-100">
+                                            Tutorials
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="gaming" class="btn btn-outline-light btn-sm w-100">
+                                            Gaming
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="cooking" class="btn btn-outline-light btn-sm w-100">
+                                            Cooking
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="technology" class="btn btn-outline-light btn-sm w-100">
+                                            Tech
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="sports" class="btn btn-outline-light btn-sm w-100">
+                                            Sports
+                                        </button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" name="description" value="travel" class="btn btn-outline-light btn-sm w-100">
+                                            Travel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- User Info Section -->
+                        <div class="bg-dark border rounded p-3 mb-4">
+                            <div class="d-flex align-items-center">
+                                {% if prof_img %}
+                                    <img src="{{ prof_img }}" alt="Profile" class="rounded-circle me-3" width="40" height="40">
+                                {% else %}
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-user text-white"></i>
+                                    </div>
+                                {% endif %}
+                                <div>
+                                    <h6 class="mb-0">Welcome, {{ username }}!</h6>
+                                    <small class="text-muted">Ready to find your next favorite video?</small>
+                                </div>
                             </div>
-                        </form>
+                        </div>
+
+                        <!-- Admin Tools (Optional) -->
+                        <div class="text-center">
+                            <form action="/chat/refresh-vector-store" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-outline-info btn-sm">
+                                    <i class="fas fa-sync-alt me-2"></i>Refresh Search Index
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Help Section -->
+                        <div class="mt-4 p-3 bg-dark border rounded">
+                            <h6 class="text-success mb-2">
+                                <i class="fas fa-question-circle me-2"></i>How it works:
+                            </h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Type what kind of videos you want to watch
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Our AI will find the best matches from our database
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Browse through personalized video recommendations
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                {% else %}
-                    <form action="/chat" method="post">
-                        <input type="hidden" name="conversation_id" value="{{conversation_id}}">
-                        {% if messages and 'How may I assist you today?' in messages[-1].content %}
-                            <div class="d-flex gap-2">
-                                <button name="message" value="1" class="btn btn-outline-light w-100"> Find videos based on your preferred tags.</button>
-                                <button name="message" value="2" class="btn btn-outline-light w-100"> Find videos based on your description.</button>
-                            </div>
-                        {% else %}
-                            <div class="input-group">
-                                <input type="text" name="message" class="form-control" placeholder="Type your message here" required>
-                                <button class="btn btn-primary" type="submit">Send</button>
-                            </div>
-                        {% endif %}
-                    </form>
-                {% endif %}
+                </div>
             </div>
         </body>
     {% else %}
         <body class="bg-dark text-light">
-            <div class="container mt-5 p-4 border border-light rounded" style="border-width: 5px;">
-            <h3 class="container text-center" style="padding: 10px;">Welcome to Youclone!</h3>
-            <h3 class="container text-center" style="padding: 10px;">Please login to use the chatbot</h3>
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="text-center p-5 border border-light rounded">
+                            <i class="fas fa-video fa-3x mb-4 text-primary"></i>
+                            <h3 class="mb-3">Welcome to YouClone!</h3>
+                            <p class="lead mb-4">Please login to use the AI Video Assistant</p>
+                            <a href="/login" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div> 
         </body>
     {% endif %}    
         
-{% endblock  %}
+{% endblock %}

@@ -8,6 +8,7 @@ bcrypt==3.2.0
 certifi==2020.12.5
 cffi==1.15.1
 chardet==4.0.0
+chromadb==0.4.15
 click==7.1.2
 cohere==4.41
 colorama==0.4.4
@@ -26,7 +27,9 @@ iniconfig==1.1.1
 isodate==0.7.2
 itsdangerous==2.2.0
 Jinja2==2.11.3
+langchain==0.0.350
 MarkupSafe==1.1.1
+numpy==1.24.0
 packaging==20.9
 passlib==1.7.4
 py==1.10.0
@@ -45,9 +48,11 @@ rsa==4.7.2
 six==1.15.0
 SQLAlchemy==1.4.11
 starlette==0.40.0
+tiktoken==0.5.1
 toml==0.10.2
 typing-extensions==4.12.2
 urllib3==1.26.4
 uvicorn==0.13.4
 psycopg2-binary==2.9.9
+sentence-transformers==2.2.2
 setuptools>=65.0 

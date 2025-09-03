@@ -41,7 +41,7 @@ def convert_vid_duration(iso_duration):
     except Exception:
         return 0
 
-def map_videos_to_db(video):
+def map_videos_to_db(video, query):
     snippets = video['snippet']
     content_dets = video['contentDetails']
     stats = video.get("statistics", {})
@@ -61,13 +61,14 @@ def map_videos_to_db(video):
         likes = int(stats.get('likeCount', 0)),
         tags = ", ".join(snippets.get('tags', [])),
         duration = convert_vid_duration(content_dets['duration']),
+        q_tag = query,
         is_active = True
     )
 
 @router.post('/videos')
 def scrape_save_videos(db : Session = Depends(get_db)):
     query = random.choice(settings.QUERY_KEYWORD_LIST)
-    search_videos = search_youtube(settings.YOUTUBE_DATAKEY, query=query, max_results=5)
+    search_videos = search_youtube(settings.YOUTUBE_DATAKEY, query=query, max_results=10)
     video_ids = [item["id"]['videoId'] for item in search_videos if "videoId" in item['id']]
     detailed_videos = video_details(settings.YOUTUBE_DATAKEY, video_ids)
 
@@ -75,7 +76,7 @@ def scrape_save_videos(db : Session = Depends(get_db)):
     for video in detailed_videos:
         duration_sec = convert_vid_duration(video['contentDetails']['duration'])
         if duration_sec > 300:
-            db_video = map_videos_to_db(video)
+            db_video = map_videos_to_db(video,query)
             #skip func
             existing_vid = db.query(Video).filter(Video.video_url == db_video.video_url).first()
             if not existing_vid:
